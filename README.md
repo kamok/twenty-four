@@ -1,14 +1,22 @@
-24 Solver
+24 Solver         
 
 Given: 
 1 + 2 + 3 + 4        [1, "+", 2, "+", 3, "+", 4]
 
 Here are the possible order of operations combinations:
+
+(1 + 2) + 3 + 4      "(" @ [0]  ")" @ [4]
+(1 + 2 + 3) + 4      "(" @ [0]  ")" @ [6]
+1 + (2 + 3 + 4)      "(" @ [2]	")" @ [8]
+1 + 2 + (3 + 4)			 "(" @ [4]  ")" @ [8]
+(1 + 2) + (3 + 4)    "(" @ [0]  ")" @ [4]  "(" @ [6]  ")" @ [10] 
+
+Old:
 ((1 + 2) / 3) * 4    "((" @ [0], ")" @ [4] and [7]       
 (1 + (2 / 3)) * 4    "(" @ [0 and [3], "))" @ [7]        
 1 + ((2 / 3) * 4)            
 1 + (2 / (3 * 4))            
-(1 + 2) / (3 * 4)           
+(1 + 2) / (3 * 4)  
 
 
 Object of the game: Make the number 24 from the four numbers on a game card.

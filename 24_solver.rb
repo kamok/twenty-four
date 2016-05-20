@@ -4,9 +4,10 @@ class TwentyFour
 
   def self.solve(a)
     operations = get_sets_of_operations                 #64 sets [["+", "+", "+"], ["+", "+", "-"]...]
-    numbers = get_sets_of_numbers(a)             #24 sets [[1, 2, 3, 4], [1, 2, 4, 3]...]  
+    numbers = get_sets_of_numbers(a)                    #24 sets [[1, 2, 3, 4], [1, 2, 4, 3]...]  
     make_possible_solutions(numbers, operations)
-    puts find_solutions
+    puts "#{find_solutions.first} = 24"
+    puts "I found #{find_solutions.count} solutions."
   end 
 
   private
@@ -33,28 +34,22 @@ class TwentyFour
       end 
     end 
     @all_expressions = []
-  
-    @all_expressions << add_o_o_1(expressions)  #send expression to order of operations method # 1
-    @all_expressions << add_o_o_2(expressions)  #send expression to order of operations method # 2
-
+    @all_expressions << add_order_of_operations(expressions)  #send expression to order of operations method 
     @all_expressions
   end
 
-  def self.add_o_o_1(expressions)
+  def self.add_order_of_operations(expressions)
     temp_storage = []  
     expressions.each do |exp|   
-      temp_storage << exp.dup.insert(0, "((").insert(4, ")").insert(7, ")") 
+      temp_storage << exp.dup.insert(0, "(").insert(4, ")") 
+      temp_storage << exp.dup.insert(0, "(").insert(6, ")")
+      temp_storage << exp.dup.insert(2, "(").insert(8, ")")
+      temp_storage << exp.dup.insert(4, "(").insert(8, ")")
+      temp_storage << exp.dup.insert(0, "(").insert(4, ")").insert(6, "(").insert(10, ")") 
     end
     temp_storage
   end
 
-  def self.add_o_o_2(expressions)  
-    temp_storage = []   
-    expressions.each do |exp| 
-      temp_storage << exp.dup.insert(0, "(").insert(3, "(").insert(7, "))") 
-    end
-    temp_storage
-  end
 
   def self.find_solutions
     solutions = []
@@ -67,24 +62,11 @@ class TwentyFour
         end
       end
     end
-
     solutions
-
-    #   if current_value == 24
-    #     solutions << s.join
-    #   end
-    # end
-    # solutions
-
-    # @possible_solutions.each do |equation|
-    #   if eval(equation) == 24
-    #     solutions << equation
-    #   end
-    # end
-    # solutions
   end
 end
 
-p TwentyFour.solve([5,6,8,13])
+p TwentyFour.solve([1,2,3,4])
 
-#[2,12,5,3]
+#2, 3, 5, 12
+#1, 4, 5, 6
