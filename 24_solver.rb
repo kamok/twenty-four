@@ -17,19 +17,7 @@ class TwentyFour
   end
 
   def self.get_unique_set_of_numbers(a)
-    set_of_numbers = a.repeated_permutation(4).to_a #[[1, 1, 1, 1], [1, 1, 1, 2]...] not unique
-    unique_sets = []
-
-    set_of_numbers.each do |permutation|
-      if permutation.uniq == permutation
-        unique_sets << permutation
-      end
-    end
-
-    unique_sets.each do|set|
-      set.map! { |num| num.to_f }
-    end
-    unique_sets 
+    set_of_numbers = a.permutation(4).to_a
   end
 
   def self.make_possible_solutions(nums, ops)
@@ -66,4 +54,6 @@ class TwentyFour
   end
 end
 
-p TwentyFour.solve([2,12,5,3])
+p TwentyFour.get_unique_set_of_numbers([1,2,3,4])
+
+#[2,12,5,3]
