@@ -6,6 +6,7 @@ class TwentyFour
     operations = get_set_of_operations                 #64 sets [["+", "+", "+"], ["+", "+", "-"]...]
     numbers = get_unique_set_of_numbers(a)             #24 sets [[1, 2, 3, 4], [1, 2, 4, 3]...]  
     make_possible_solutions(numbers, operations)
+    binding.pry
     find_solutions
   end 
 
@@ -36,20 +37,32 @@ class TwentyFour
 
     nums.each do |num|
       ops.each do |op|
-        @possible_solutions << num.zip(op).flatten.join
+        @possible_solutions << num.zip(op).flatten
       end 
     end
-    @possible_solutions
+    @possible_solutions  
   end
 
   def self.find_solutions
     solutions = []
-    @possible_solutions.each do |equation|
-      if eval(equation) == 24
-        solutions << equation
+
+    @possible_solutions.each do |s|   #[2.0, "+", 12.0, "+", 5.0, "+", 3.0, nil]
+      current_value = eval(s[0..2].join)            # 14
+      current_value = eval(s[3..4].unshift(current_value).join)     # [14.0, "+", 5.0]
+      current_value = eval(s[5..6].unshift(current_value).join)
+
+      if current_value == 24
+        solutions << s.join
       end
     end
     solutions
+
+    # @possible_solutions.each do |equation|
+    #   if eval(equation) == 24
+    #     solutions << equation
+    #   end
+    # end
+    # solutions
   end
 end
 
