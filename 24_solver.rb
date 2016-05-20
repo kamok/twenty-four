@@ -19,7 +19,7 @@ class TwentyFour
     sets_of_integers = a.permutation(4).to_a
 
     sets_of_integers.each do |set|
-      set.map!(&:to_f)
+      set.map!(&:to_f)     #equivalent to set.map!(|num| num.to_f)
     end
     sets_of_integers
   end
@@ -31,13 +31,20 @@ class TwentyFour
       ops.each do |op|
         expressions << num.zip(op).flatten.compact
       end 
-    end       
-    # a = ["(1 + (2 / 3)) * 4 "]
-    # add_order_of_operations(a)
+    end 
+    all_expressions = []
+  
+    all_expressions << add_o_o_1(expressions[0])  #send expression to order of operations method # 1
+    all_expressions << add_o_o_2(expressions[0])  #send expression to order of operations method # 2
+
   end
 
-  def self.add_order_of_operations(expressions)
-    expressions
+  def self.add_o_o_1(exp1)      
+    exp1.dup.insert(0, "((").insert(4, ")").insert(7, ")") 
+  end
+
+  def self.add_o_o_2(exp2)    
+    exp2.dup.insert(0, "(").insert(3, "(").insert(7, "))") 
   end
 
   def self.find_solutions
