@@ -6,7 +6,7 @@ class TwentyFour
     operations = get_sets_of_operations                 #64 sets [["+", "+", "+"], ["+", "+", "-"]...]
     numbers = get_sets_of_numbers(a)             #24 sets [[1, 2, 3, 4], [1, 2, 4, 3]...]  
     make_possible_solutions(numbers, operations)
-    # find_solutions
+    puts find_solutions
   end 
 
   private
@@ -32,28 +32,43 @@ class TwentyFour
         expressions << num.zip(op).flatten.compact
       end 
     end 
-    all_expressions = []
+    @all_expressions = []
   
-    all_expressions << add_o_o_1(expressions[0])  #send expression to order of operations method # 1
-    all_expressions << add_o_o_2(expressions[0])  #send expression to order of operations method # 2
+    @all_expressions << add_o_o_1(expressions)  #send expression to order of operations method # 1
+    @all_expressions << add_o_o_2(expressions)  #send expression to order of operations method # 2
 
+    @all_expressions
   end
 
-  def self.add_o_o_1(exp1)      
-    exp1.dup.insert(0, "((").insert(4, ")").insert(7, ")") 
+  def self.add_o_o_1(expressions)
+    temp_storage = []  
+    expressions.each do |exp|   
+      temp_storage << exp.dup.insert(0, "((").insert(4, ")").insert(7, ")") 
+    end
+    temp_storage
   end
 
-  def self.add_o_o_2(exp2)    
-    exp2.dup.insert(0, "(").insert(3, "(").insert(7, "))") 
+  def self.add_o_o_2(expressions)  
+    temp_storage = []   
+    expressions.each do |exp| 
+      temp_storage << exp.dup.insert(0, "(").insert(3, "(").insert(7, "))") 
+    end
+    temp_storage
   end
 
   def self.find_solutions
-    # solutions = []
+    solutions = []
 
-    # @possible_solutions.each do |s|   #[2.0, "+", 12.0, "+", 5.0, "+", 3.0, nil]
-    #   current_value = eval(s[0..2].join)            # 14
-    #   current_value = eval(s[3..4].unshift(current_value).join)     # [14.0, "+", 5.0]
-    #   current_value = eval(s[5..6].unshift(current_value).join)
+    @all_expressions.each do |wrapper|
+      wrapper.each do |exp|
+        value = eval(exp.join)
+        if value == 24
+          solutions << exp.join
+        end
+      end
+    end
+
+    solutions
 
     #   if current_value == 24
     #     solutions << s.join
@@ -70,6 +85,6 @@ class TwentyFour
   end
 end
 
-p TwentyFour.solve([1,2,3,4])
+p TwentyFour.solve([5,6,8,13])
 
 #[2,12,5,3]
