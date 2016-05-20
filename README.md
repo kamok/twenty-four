@@ -1,10 +1,10 @@
 24 Solver
 
 Given: 
-1 + 2 / 3 * 4 
+1 + 2 / 3 * 4        [1, "+", 2, "+", 3, "+", 4]
 
 Here are the possible order of operations combinations:
-((1 + 2) / 3) * 4            
+((1 + 2) / 3) * 4    "((" = [0], ")" = [4] and [7]       
 (1 + (2 / 3)) * 4            
 1 + ((2 / 3) * 4)            
 1 + (2 / (3 * 4))            
