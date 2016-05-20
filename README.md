@@ -1,3 +1,16 @@
+24 Solver
+
+Given: 
+1 + 2 / 3 * 4 
+
+Here are the possible order of operations combinations:
+((1 + 2) / 3) * 4            
+(1 + (2 / 3)) * 4            
+1 + ((2 / 3) * 4)            
+1 + (2 / (3 * 4))            
+(1 + 2) / (3 * 4)           
+
+
 Object of the game: Make the number 24 from the four numbers on a game card.
 You can add, subtract, multiply and divide. Use all four numbers on the card, but use each number only once. You do not have to use all four operations. 
 EG: [1, 2, 3, 4] 
