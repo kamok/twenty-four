@@ -1,5 +1,3 @@
-require 'pry'
-
 class TwentyFour
 
   def self.solve(a)
@@ -58,7 +56,7 @@ class TwentyFour
       wrapper.each do |exp|
         value = eval(exp.join)
         if value == 24
-          solutions << exp.join
+          solutions << exp.join(" ")
         end
       end
     end
