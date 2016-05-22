@@ -1,3 +1,7 @@
+todo:
+Seperate out into a Card class.
+Make 24.rb a class? Waiting on Dylan
+
 24 Solver         
 
 Given: 
