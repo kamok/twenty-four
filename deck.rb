@@ -4,6 +4,9 @@ class Deck
 
   def initialize
     @deck = []
+  end
+
+  def draw
     puts "How many normal cards?"
     pick_easy_cards(gets.chomp)
     puts "How many extra spicy cards?"
@@ -36,5 +39,3 @@ class Deck
   ]
 
 end
-
-Deck.new
