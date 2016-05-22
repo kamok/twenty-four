@@ -13,6 +13,14 @@ end
 
 def initialize_deck
   @deck = Deck.new
+  draw_card_to_deck
+end
+
+def draw_card_to_deck
+  puts "How many normal cards?"
+  @deck.pick_easy_cards(gets.chomp)
+  puts "How many extra spicy cards?"
+  @deck.pick_hard_cards(gets.chomp)
 end
 
 # def set_players
@@ -30,17 +38,9 @@ end
 
 def play
   until @deck.has_no_more_cards
-    puts "Solve this: #{@deck.current_card}."
-    if @deck.card_solved?
-      puts "Correct!"
-      # if @player_list > 1
-      #   puts "Who got that right?" 
-      #   add_point(gets.chomp)
-      # end
-    else 
-      puts "Try again."
-      play
-    end
+    puts "Solve this: #{@deck.draw_card}."
+    puts "Try Again!" until @deck.card_solved?
+    puts "Correct!"
   end
   puts "You're a winner!"
 end
