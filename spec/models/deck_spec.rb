@@ -1,5 +1,6 @@
 require 'spec_helper'
 require '../24/deck.rb'
+require 'pry'
 
 describe Deck do 
   let(:deck) { Deck.new }
@@ -32,6 +33,22 @@ describe Deck do
       deck.pick_hard_cards(n)
       expect(deck.deck.count).to be(n)
     end
+  end
+
+  describe "#draw_card" do
+    before(:each) do
+      deck.pick_easy_cards(3)
+      expect(deck.deck).to_not be_empty
+    end
+    it "draws a random card from deck on start of game" do
+      expect(deck.current_card).to be(nil)
+
+      deck.draw_card
+
+      expect(deck.current_card).to_not be_empty
+    end
+
+    # it "draws a card"
   end
 
 end
