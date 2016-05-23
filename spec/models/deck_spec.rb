@@ -108,7 +108,6 @@ describe Deck do
   describe "#remove_from_deck" do
     before(:each) do
       fill_deck_with_cards
-      expect(deck.deck.count).to eq(3)
     end
     it "removes a card from the deck" do
       deck.remove_from_deck
@@ -119,17 +118,50 @@ describe Deck do
       first_card = (deck.deck.first)
       deck.remove_from_deck
 
+
       expect(deck.deck.first).to_not be(first_card)
     end
   end
 
   describe "#get_player_input" do
     it "takes in a player input of an operation and returns it in an array with floats" do
-    deck.stub(:gets) {"5+5"}
-    
+    allow(deck).to receive(:gets) {"5+5"}
     expect(deck.get_player_input).to eq([5.0, "+" , 5.0])
+
+    allow(deck).to receive(:gets) {"7*9"}
+    expect(deck.get_player_input).to eq([7.0, "*" , 9.0])
     end
   end
+
+  describe "#is_input_valid?" do
+    before(:each) do
+      fill_deck_with_cards
+      deck.draw_card
+    end
+    it "returns true if input contains numbers from the current_card" do
+      first_num, last_num = deck.current_card.first, deck.current_card.last
+      allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
+      deck.get_player_input
+
+      expect(deck.is_input_valid?(deck.player_input)).to be(true)
+    end
+
+    it "returns false if input contains ANY numbers NOT from the current_card" do
+      allow(deck).to receive(:gets) {"99/99"}
+      deck.get_player_input
+
+      expect(deck.is_input_valid?(deck.player_input)).to be(false)
+    end
+  end
+
+  # describe "#card_solved?" do
+  #   it "returns true or false if current_card only has one value left" do
+  #   end
+  #   it "returns true if the current_card is 24" do
+  #   end
+  #   it "returns false if current_card is NOT 24" do
+  #   end
+  # end
 
   private
 
