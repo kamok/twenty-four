@@ -13,7 +13,7 @@ class Deck
     @current_card = deck.sample.dup
     @save_card = current_card.clone
   end
-
+ 
   def reset_card
     @current_card = @save_card.clone
   end
