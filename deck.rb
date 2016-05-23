@@ -11,10 +11,19 @@ class Deck
 
   def draw_card
     @current_card = deck.sample
+    save_card(current_card)
+  end
+
+  def save_card(current_card)
+    @save_card = current_card.clone
+  end
+
+  def reset_card
+    @current_card = @save_card.dup
   end
 
   def card_solved?
-    until current_card.length == 1 || false      
+    until current_card.length == 1     
       if is_input_valid?(get_player_input) == true
         update_card(evaluate_input)   
         p current_card

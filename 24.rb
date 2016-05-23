@@ -40,9 +40,7 @@ def play
   until @deck.has_no_more_cards
     puts "Solve this: #{@deck.draw_card}."
     until @deck.card_solved?
-      puts "Try Again!"
-      #reset_card
-      @deck.card_solved?
+      puts "Try Again! #{@deck.reset_card}"
     end
     puts "Correct!"
     @deck.remove_from_deck 
