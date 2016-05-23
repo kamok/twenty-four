@@ -1,6 +1,7 @@
 require 'spec_helper'
 require '../24/deck.rb'
 require 'pry'
+require 'stringio'
 
 describe Deck do 
   let(:deck) { Deck.new }
@@ -122,13 +123,20 @@ describe Deck do
     end
   end
 
+  describe "#get_player_input" do
+    it "takes in a player input of an operation and returns it in an array with floats" do
+    deck.stub(:gets) {"5+5"}
+    
+    expect(deck.get_player_input).to eq([5.0, "+" , 5.0])
+    end
+  end
 
-private
+  private
 
-def fill_deck_with_cards
-  deck.pick_easy_cards(2)
-  deck.pick_hard_cards(1)
-end
+  def fill_deck_with_cards
+    deck.pick_easy_cards(2)
+    deck.pick_hard_cards(1)
+  end
 
 end
 
