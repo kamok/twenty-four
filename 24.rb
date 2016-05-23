@@ -26,10 +26,9 @@ end
 
 def play
   until @deck.has_no_more_cards
-    puts "Solve this: #{@deck.choose_card}."
+    puts "Solve this: #{@deck.draw_card}."
     until @deck.card_solved?
       puts "Try Again! #{@deck.reset_card}"
-      binding.pry
     end
     puts "Correct!"
     @deck.remove_from_deck 

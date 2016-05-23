@@ -25,8 +25,8 @@ class Deck
     deck.empty? ? true : false
   end
 
-  def choose_card
-    @current_card = deck.sample.clone   
+  def draw_card
+    @current_card = deck.first 
     @save_card = current_card.clone
   end
  
@@ -37,7 +37,7 @@ class Deck
   def card_solved?
     until current_card.length == 1     
       if is_input_valid?(get_player_input) == true
-        update_card(evaluate_input)   
+        update_card(calculate_input)   
         p current_card
       else 
         puts "A number you typed isn't even on the card..."
@@ -68,7 +68,7 @@ class Deck
     end
   end  
 
-  def evaluate_input
+  def calculate_input
     new_value = eval(player_input.join)    
   end
 
@@ -79,7 +79,7 @@ class Deck
   end
 
   def remove_from_deck
-    deck.delete(@save_card)
+    deck.delete(deck.first)
   end
 
 end
