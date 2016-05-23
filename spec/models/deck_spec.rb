@@ -104,7 +104,24 @@ describe Deck do
     end
   end
 
-  
+  describe "#remove_from_deck" do
+    before(:each) do
+      fill_deck_with_cards
+      expect(deck.deck.count).to eq(3)
+    end
+    it "removes a card from the deck" do
+      deck.remove_from_deck
+
+      expect(deck.deck.count).to eq(2)
+    end
+    it "removes the first card from the deck" do
+      first_card = (deck.deck.first)
+      deck.remove_from_deck
+
+      expect(deck.deck.first).to_not be(first_card)
+    end
+  end
+
 
 private
 
