@@ -1,11 +1,3 @@
-todo:
-Currently, we have 3 copies of the card that we're playing. One is in the deck. One is in @current_card, and one is in @save_card.
-
-I need to change it so when we init a new deck, the cards are shuffled. Use .shuffle method. Then, change choose card into draw card. Pick from bottom of deck. Change reset card method to change the first value back to a copy of the @save_card. Delete cards method will change to deleting the first card in deck.
-
-@current_card will be tied to deck.first
-@save_card will be the only save point
-
 24 Solver         
 
 Given: 

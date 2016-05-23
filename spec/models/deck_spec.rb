@@ -35,6 +35,32 @@ describe Deck do
     end
   end
 
+  describe "#shuffle_deck" do
+    before(:each) do
+      deck.pick_easy_cards(2)
+      expect(deck.deck.count).to be (2)
+      deck.pick_hard_cards(1)
+      expect(deck.deck.count).to be (3)
+    end
+    it "returns all cards from the original deck" do
+      card_1 = deck.deck[0]
+      card_2 = deck.deck[1]
+      card_3 = deck.deck[2]
+
+      deck.shuffle_deck
+
+      expect(deck.deck).to include(card_1 && card_2 && card_3)
+    end
+
+    it "shuffles them in a different order" do
+      initial_order = deck.deck.join
+
+      deck.shuffle_deck
+
+      expect(deck.deck.join).to_not be(initial_order)
+    end
+  end
+
   # describe "#choose_card" do
   #   before(:each) do
   #     deck.pick_easy_cards(3)

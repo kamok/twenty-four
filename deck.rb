@@ -9,16 +9,16 @@ class Deck
     @deck = []
   end
 
-  def shuffle_deck
-    deck.shuffle!
-  end
-
   def pick_easy_cards(n)
     deck.tap { |deck| n.to_i.times { deck << (EASY_MASTER_DECK - deck).sample } }
   end
 
   def pick_hard_cards(n)
     deck.tap { |deck| n.to_i.times { deck << (HARD_MASTER_DECK - deck).sample } }
+  end
+
+  def shuffle_deck
+    deck.shuffle!
   end
 
   def has_no_more_cards
@@ -57,15 +57,7 @@ class Deck
   end
 
   def is_input_valid?(input)
-    if current_card.include?(input.first)
-      if current_card.include?(input.last)
-        true
-      else
-        false
-      end
-    else
-      false
-    end
+    current_card.include?(input.first) && current_card.include?(input.last) ? true : false
   end  
 
   def calculate_input
