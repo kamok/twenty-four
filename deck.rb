@@ -10,11 +10,7 @@ class Deck
   end
 
   def draw_card
-    @current_card = deck.sample
-    save_card(current_card)
-  end
-
-  def save_card(current_card)
+    @current_card = deck.sample.dup
     @save_card = current_card.clone
   end
 
@@ -79,7 +75,7 @@ class Deck
   end
 
   def remove_from_deck
-    deck.delete(current_card)
+    deck.delete(@save_card)
   end
 
 end
