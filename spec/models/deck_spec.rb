@@ -37,10 +37,7 @@ describe Deck do
 
   describe "#shuffle_deck" do
     before(:each) do
-      deck.pick_easy_cards(2)
-      expect(deck.deck.count).to be (2)
-      deck.pick_hard_cards(1)
-      expect(deck.deck.count).to be (3)
+      fill_deck_with_cards
     end
     it "returns all cards from the original deck" do
       card_1 = deck.deck[0]
@@ -67,22 +64,54 @@ describe Deck do
     end
   end
 
-  # describe "#choose_card" do
-  #   before(:each) do
-  #     deck.pick_easy_cards(3)
-  #     expect(deck.deck.count).to be (3)
-  #   end
-  #   it "draws a random card duplicate from deck on start of game" do
-  #     expect(deck.current_card).to be(nil)
+  describe "#draw_card" do
+    before(:each) do
+      fill_deck_with_cards
+    end
+    it "sets current_card to the first card of the deck" do
+      deck.draw_card
 
-  #     deck.choose_card
+      expect(deck.current_card).to eq(deck.deck.first)
+    end
+    it "saves a copy of current_card" do
+      deck.draw_card
 
-  #     expect(deck.current_card).to_not be_empty
-  #     expect(deck.deck.count).to be (3)
-  #   end
+      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
+      save_card_data = deck.instance_variable_get(:@save_card) 
 
-  #   it "saves"
-  # end
+      deck.current_card = nil
+
+      expect(deck.current_card).to eq(nil)
+      expect(deck.instance_variable_get(:@save_card)).to eq(save_card_data)
+    end
+  end
+
+  describe "#reset_card" do
+    before(:each) do
+      fill_deck_with_cards
+      deck.draw_card
+    end
+    it "resets the current_card back to @save_card" do
+      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
+
+      deck.current_card = nil
+
+      expect(deck.current_card).to eq(nil)
+
+      deck.reset_card
+
+      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
+    end
+  end
+
+  
+
+private
+
+def fill_deck_with_cards
+  deck.pick_easy_cards(2)
+  deck.pick_hard_cards(1)
+end
 
 end
 
