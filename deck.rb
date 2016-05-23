@@ -9,8 +9,24 @@ class Deck
     @deck = []
   end
 
-  def draw_card
-    @current_card = deck.sample.dup
+  def shuffle_deck
+    deck.shuffle!
+  end
+
+  def pick_easy_cards(n)
+    deck.tap { |deck| n.to_i.times { deck << (EASY_MASTER_DECK - deck).sample } }
+  end
+
+  def pick_hard_cards(n)
+    deck.tap { |deck| n.to_i.times { deck << (HARD_MASTER_DECK - deck).sample } }
+  end
+
+  def has_no_more_cards
+    deck.empty? ? true : false
+  end
+
+  def choose_card
+    @current_card = deck.sample.clone   
     @save_card = current_card.clone
   end
  
@@ -60,18 +76,6 @@ class Deck
     current_card.slice!(current_card.index(player_input.first))
     current_card.slice!(current_card.index(player_input.last))
     current_card << new_value.to_i
-  end
-
-  def has_no_more_cards
-    deck.empty? ? true : false
-  end
-
-  def pick_easy_cards(n)
-    deck.tap { |deck| n.to_i.times { deck << (EASY_MASTER_DECK - deck).sample } }
-  end
-
-  def pick_hard_cards(n)
-    deck.tap { |deck| n.to_i.times { deck << (HARD_MASTER_DECK - deck).sample } }
   end
 
   def remove_from_deck

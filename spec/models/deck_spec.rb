@@ -35,21 +35,22 @@ describe Deck do
     end
   end
 
-  describe "#draw_card" do
-    before(:each) do
-      deck.pick_easy_cards(3)
-      expect(deck.deck).to_not be_empty
-    end
-    it "draws a random card from deck on start of game" do
-      expect(deck.current_card).to be(nil)
+  # describe "#choose_card" do
+  #   before(:each) do
+  #     deck.pick_easy_cards(3)
+  #     expect(deck.deck.count).to be (3)
+  #   end
+  #   it "draws a random card duplicate from deck on start of game" do
+  #     expect(deck.current_card).to be(nil)
 
-      deck.draw_card
+  #     deck.choose_card
 
-      expect(deck.current_card).to_not be_empty
-    end
+  #     expect(deck.current_card).to_not be_empty
+  #     expect(deck.deck.count).to be (3)
+  #   end
 
-    # it "draws a card"
-  end
+  #   it "saves"
+  # end
 
 end
 

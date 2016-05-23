@@ -2,7 +2,7 @@ require_relative 'deck'
 require 'pry'
 
 def start_game
-  set_game       #@player_list, @deck
+  set_game      
   play
 end
 
@@ -14,6 +14,7 @@ end
 def initialize_deck
   @deck = Deck.new
   draw_card_to_deck
+  @deck.shuffle_deck
 end
 
 def draw_card_to_deck
@@ -21,6 +22,19 @@ def draw_card_to_deck
   @deck.pick_easy_cards(gets.chomp)
   puts "How many extra spicy cards?"
   @deck.pick_hard_cards(gets.chomp)
+end
+
+def play
+  until @deck.has_no_more_cards
+    puts "Solve this: #{@deck.choose_card}."
+    until @deck.card_solved?
+      puts "Try Again! #{@deck.reset_card}"
+      binding.pry
+    end
+    puts "Correct!"
+    @deck.remove_from_deck 
+  end
+  puts "You're a winner!"
 end
 
 # def set_players
@@ -35,17 +49,5 @@ end
 #     puts "Please enter a valid number."
 #   end
 # end
-
-def play
-  until @deck.has_no_more_cards
-    puts "Solve this: #{@deck.draw_card}."
-    until @deck.card_solved?
-      puts "Try Again! #{@deck.reset_card}"
-    end
-    puts "Correct!"
-    @deck.remove_from_deck 
-  end
-  puts "You're a winner!"
-end
 
 start_game
