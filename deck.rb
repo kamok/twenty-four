@@ -19,7 +19,7 @@ class Deck
   end
 
   def reset_card
-    @current_card = @save_card.dup
+    @current_card = @save_card.clone
   end
 
   def card_solved?
