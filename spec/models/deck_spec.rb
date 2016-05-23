@@ -61,6 +61,12 @@ describe Deck do
     end
   end
 
+  describe "#has_no_more_cards" do
+    it "returns true when there are no cards" do
+      expect(deck.has_no_more_cards).to be(true)
+    end
+  end
+
   # describe "#choose_card" do
   #   before(:each) do
   #     deck.pick_easy_cards(3)
