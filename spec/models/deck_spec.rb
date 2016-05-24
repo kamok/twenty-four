@@ -9,10 +9,18 @@ describe Deck do
   end
 
   describe "pick_cards_from_master_deck" do
-    it "takes in a diffculty argument and qty argument"
+    it "allows an easy argument and qty argument" do
+      expect(deck.pick_cards_from_master_deck("easy", "5")).to be_truthy
+    end
+
+    it "allows an hard argument and qty argument" do
+      expect(deck.pick_cards_from_master_deck("hard", "2")).to be_truthy
     end
 
     it "adds precisely n number of cards from input" do
+      n = 5
+      deck.pick_cards_from_master_deck("easy", n)
+      expect(deck.deck.count).to be(n)
     end
   end
 
@@ -225,4 +233,3 @@ describe Deck do
   end
 
 end
-
