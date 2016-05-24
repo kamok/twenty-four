@@ -8,33 +8,15 @@ describe Deck do
     expect(deck.deck).to be_empty
   end
 
-  describe "#pick_easy_cards" do
-    it "can add cards from the easy master deck" do
-      deck.pick_easy_cards(1)
-      expect(deck.deck).to_not be_empty
+  describe "pick_cards_from_master_deck" do
+    it "takes in a diffculty argument and qty argument"
     end
 
     it "adds precisely n number of cards from input" do
-      n = 5
-      deck.pick_easy_cards(n)
-      expect(deck.deck.count).to be(n)
     end
   end
 
-  describe "#pick_hard_cards" do
-    it "can add cards from the hard master deck" do
-      deck.pick_hard_cards(1)
-      expect(deck.deck).to_not be_empty
-    end 
-
-    it "adds precisely n number of cards from input" do
-      n = 5
-      deck.pick_hard_cards(n)
-      expect(deck.deck.count).to be(n)
-    end
-  end
-
-  describe "#shuffle_deck" do
+  describe "#shuffle_deck!" do
     before(:each) do
       fill_deck_with_cards
     end
@@ -43,7 +25,7 @@ describe Deck do
       card_2 = deck.deck[1]
       card_3 = deck.deck[2]
 
-      deck.shuffle_deck
+      deck.shuffle_deck!
 
       expect(deck.deck).to include(card_1 && card_2 && card_3)
     end
@@ -51,7 +33,7 @@ describe Deck do
     it "shuffles them in a different order" do
       initial_order = deck.deck.join
 
-      deck.shuffle_deck
+      deck.shuffle_deck!
 
       expect(deck.deck.join).to_not be(initial_order)
     end
@@ -105,7 +87,7 @@ describe Deck do
 
   describe "#card_solved?" do
     before(:each) do
-      deck.pick_hard_cards(1)
+      deck.pick_cards_from_master_deck("hard", 1)
       deck.draw_card
     end
     #######################
@@ -227,8 +209,8 @@ describe Deck do
   private
 
   def fill_deck_with_cards
-    deck.pick_easy_cards(2)
-    deck.pick_hard_cards(1)
+    deck.pick_cards_from_master_deck("easy", 2)
+    deck.pick_cards_from_master_deck("hard", 1)
   end
 
   def fill_deck_and_draw_card

@@ -8,14 +8,14 @@ end
 def initialize_deck
   @deck = Deck.new
   draw_card_to_deck
-  @deck.shuffle_deck
+  @deck.shuffle_deck!
 end
 
 def draw_card_to_deck
   puts "How many normal cards?"
-  @deck.pick_easy_cards(gets.chomp)
+  @deck.pick_cards_from_master_deck("easy", gets.chomp)
   puts "How many extra spicy cards?"
-  @deck.pick_hard_cards(gets.chomp)
+  @deck.pick_cards_from_master_deck("hard", gets.chomp)
 end
 
 def play

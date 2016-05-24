@@ -8,19 +8,20 @@ class Deck
   #These are the hardest ones in the game according to the stats.
   HARD_MASTER_DECK = [[2,3,5,12], [1,4,5,6], [3,6,6,11], [2,3,8,13], [1,8,12,12]]
 
-  def initialize
+  def initialize 
     @deck = []
   end
 
-  def pick_easy_cards(n)
-    deck.tap { |deck| n.to_i.times { deck << (EASY_MASTER_DECK - deck).sample } }
+  def pick_cards_from_master_deck(diffculty, qty)
+    case diffculty
+    when "easy"
+      deck.tap { |deck| qty.to_i.times { deck << (EASY_MASTER_DECK - deck).sample } }
+    when "hard"
+      deck.tap { |deck| qty.to_i.times { deck << (HARD_MASTER_DECK - deck).sample } }
+    end
   end
 
-  def pick_hard_cards(n)
-    deck.tap { |deck| n.to_i.times { deck << (HARD_MASTER_DECK - deck).sample } }
-  end
-
-  def shuffle_deck
+  def shuffle_deck!
     deck.shuffle!
   end
 
