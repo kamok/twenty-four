@@ -67,7 +67,7 @@ class Deck
   end  
 
   def calculate_input
-    new_value = eval(player_input.join)    
+    eval(player_input.join)    
   end
 
   def update_card(new_value)

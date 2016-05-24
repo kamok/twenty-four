@@ -132,11 +132,8 @@ describe Deck do
 
   describe "#solvable?" do
     before(:each) do
-      fill_deck_with_cards
-      deck.draw_card
-      first_num, last_num = deck.current_card.first, deck.current_card.last
-      allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
-      deck.get_player_input
+      fill_deck_and_draw_card
+      input_valid_player_input
     end
     it "calls is_input_valid? with player_input" do
       expect(deck).to receive(:input_valid?).with( deck.player_input )
@@ -166,8 +163,7 @@ describe Deck do
 
   describe "#input_valid?" do
     before(:each) do
-      fill_deck_with_cards
-      deck.draw_card
+      fill_deck_and_draw_card
     end
     it "returns true if input contains numbers from the current_card" do
       first_num, last_num = deck.current_card.first, deck.current_card.last
@@ -185,11 +181,24 @@ describe Deck do
     end
   end
 
-  # describe "#calculate_input" do
-  # end
+  describe "#calculate_input" do
+    before(:each) do
+      fill_deck_and_draw_card
+      input_valid_player_input
+    end
+    it "evaluates the player_input as a string operation" do
+      expect(deck.calculate_input).to eq(eval(deck.player_input.join))
+    end
+    it "returns a float" do
+      calculated_input_class = deck.calculate_input.class
 
-  # describe "#update_card" do
-  # end
+      expect(calculated_input_class).to be(Float)
+    end
+  end
+
+  describe "#update_card" do
+
+  end
 
   describe "#remove_from_deck" do
     before(:each) do
@@ -214,6 +223,17 @@ describe Deck do
   def fill_deck_with_cards
     deck.pick_easy_cards(2)
     deck.pick_hard_cards(1)
+  end
+
+  def fill_deck_and_draw_card
+    fill_deck_with_cards
+    deck.draw_card
+  end
+
+  def input_valid_player_input
+    first_num, last_num = deck.current_card.first, deck.current_card.last
+    allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
+    deck.get_player_input
   end
 
 end
