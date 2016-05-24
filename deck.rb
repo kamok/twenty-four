@@ -35,14 +35,15 @@ class Deck
   end
 
   def card_solved?
-    until current_card.length == 1     
+    until current_card.length == 1 
+      get_player_input    
       solvable?
     end
     current_card == [24] ? true : false                                                                     
   end
 
   def solvable?
-    if is_input_valid?(get_player_input)
+    if is_input_valid?(player_input)
       update_card(calculate_input)   
     end
     p current_card

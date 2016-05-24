@@ -130,8 +130,20 @@ describe Deck do
     end
   end
 
-  # describe "#solvable?" do
-  # end
+  describe "#solvable?" do
+    it "calls is_input_valid? with get_player_input" do
+      # expect(deck).to receive(:is_input_valid?).with( deck.get_player_input )
+      # # allow(deck).to receive(:gets) {"5+5"}
+      # deck.solvable?
+
+    end
+
+    it "calls updates card with calculate_input if input is valid" do
+    end
+
+    it "prints the current_card" do
+    end
+  end
 
   describe "#get_player_input" do
     it "takes in a player input of an operation and returns it in an array with floats" do
