@@ -190,14 +190,16 @@ describe Deck do
       expect(deck.calculate_input).to eq(eval(deck.player_input.join))
     end
     it "returns a float" do
-      calculated_input_class = deck.calculate_input.class
-
-      expect(calculated_input_class).to be(Float)
+      expect(deck.calculate_input).to be_a(Float)
     end
   end
 
   describe "#update_card" do
+    it "deletes 2 old card values from current_card" do
+    end
 
+    it "inserts a new card value into current_card" do
+    end
   end
 
   describe "#remove_from_deck" do
