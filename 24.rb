@@ -1,14 +1,8 @@
 require_relative 'deck'
-require 'pry'
 
 def start_game
-  set_game      
+  initialize_deck  
   play
-end
-
-def set_game
-  # set_players
-  initialize_deck 
 end
 
 def initialize_deck
@@ -36,6 +30,8 @@ def play
   puts "You're a winner!"
 end
 
+start_game
+
 # def set_players
 #   puts "Choose # of players. (1-4)"
 #   input = gets.chomp.to_i
@@ -48,5 +44,3 @@ end
 #     puts "Please enter a valid number."
 #   end
 # end
-
-start_game

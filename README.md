@@ -1,45 +1,21 @@
-24 Solver         
+# A game of 24 played on the console in Ruby
+The code follows a functional core, imperative shell style OO style of organization, where the functional core has the bulk of the logic of the game and the imperative shell simply calls the functional core.
 
-Given: 
-1 + 2 + 3 + 4        [1, "+", 2, "+", 3, "+", 4]
+### How to play
+Given four numbers, use ( +, -, *, / ) to arrive at the number 24.    
+Eg: [ 1, 2 ,3 ,4 ]  
+(4 * 3 = 12) | (12 * 2 = 24) | (24 / 1 = 24)  
+You may use ( +, -, *, / ) as many times as you want. But each number only once. 
 
-Here are the possible order of operations combinations:
+##### Getting the game
+Clone the repo with `git clone https://github.com/kamok/twenty-four.git`  
+Start the game with `ruby 24.rb` 
 
-(1 + 2) + 3 + 4      "(" @ [0]  ")" @ [4]
-(1 + 2 + 3) + 4      "(" @ [0]  ")" @ [6]
-1 + (2 + 3 + 4)      "(" @ [2]	")" @ [8]
-1 + 2 + (3 + 4)			 "(" @ [4]  ")" @ [8]
-(1 + 2) + (3 + 4)    "(" @ [0]  ")" @ [4]  "(" @ [6]  ")" @ [10] 
+##### Playing the game
+When you start, you will be prompted to type in a number of easy and hard card you want to play. I recommend 3 easy and 1 hard to start, as the hard cards are really really hard.  
+Then, given a card, enter a operation with only two numbers. eg. 1+1. Spaces don't matter. That's it! Good luck.
 
-Old:
-((1 + 2) / 3) * 4    "((" @ [0], ")" @ [4] and [7]       
-(1 + (2 / 3)) * 4    "(" @ [0 and [3], "))" @ [7]        
-1 + ((2 / 3) * 4)            
-1 + (2 / (3 * 4))            
-(1 + 2) / (3 * 4)  
+##### Future Versions
+I plan to implement multiplayer in the future. In 24.rb right now, there's a method that sets an instance variable called @player_list into an array containing the players's ID. At the beginning of each cycle of attempting to solve a card, a player will need to set their player ID first to identify who is solving the question. 
 
-
-Object of the game: Make the number 24 from the four numbers on a game card.
-You can add, subtract, multiply and divide. Use all four numbers on the card, but use each number only once. You do not have to use all four operations. 
-EG: [1, 2, 3, 4] 
-
-4*3=12
-12*2=24
-24/1=24
-
-This card has a value of 1. Ranges from 1-3, with 3 being hardest.
-
-2 Versions.
-Version 1: multiplayer. Version 2: single player and timed.
-
-Version 1: At game start, initiate number of players, and names for players.
-eg. Player A = "Bob", Player B = "Cait"
-A card is shown, and players have to solve in head.
-When they get it, they type in A or B to let game knows it's them typing
-Then they type in the solution eg. "4*3=12" *numbers disappear remaining:[1, 2 ]
-"12*2=24" remaining:[1]
-"24/1=24" player A wins, gets the point
-Another card is shown...etc. If player gets wrong, they are deducted 1/2 point of card value.
-Game continues for 10 cards. Highest number of points win. 
-
-Version 2: singleplayer. Use Time.current at start of Card 1. Then, anytime a player solves a card, we take another Time.current. Subtract old time by new time and if it exceeds a certain amount no more cards. 
+Then, a points system will need to be added to induce competitiveness. Since each card has a different diffculty level, each card will be worth different points. That would need a restructure of the data strcture in storing the cards right now, probably using a hash with each key being the card and a value of the points after it. 

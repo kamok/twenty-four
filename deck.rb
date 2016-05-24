@@ -1,8 +1,11 @@
-require 'pry'
 class Deck 
   attr_accessor :deck, :current_card, :player_input
 
-  EASY_MASTER_DECK = [[1,1,11,11], [1,1,4,6], [6,6,6,6], [1,1,1,8], [1,1,2,12], [1,2,2,6]]
+  #I get the cards from here: http://www.4nums.com/game/difficulties/
+  #I use card numbers 1-5 and numbers 1000-1010.
+  EASY_MASTER_DECK = [[1,1,11,11], [1,1,4,6], [6,6,6,6], [1,1,1,8], [1,1,2,12], [2,4,4,10], [3,7,9,12], [2,2,2,5], [5,8,10,11], [7,7,9,10], [3,7,8,11], [4,4,6,10], [4,4,7,10], [6,8,9,12], [1,4,7,7]]
+  
+  #These are the hardest ones in the game according to the stats.
   HARD_MASTER_DECK = [[2,3,5,12], [1,4,5,6], [3,6,6,11], [2,3,8,13], [1,8,12,12]]
 
   def initialize
@@ -50,8 +53,8 @@ class Deck
   end
 
   def get_player_input
-    @player_input = gets.chomp.to_s.gsub(/\s+/, "")                           #"1 + 4" => 1+4"
-    @player_input = player_input.split(%r{(\+|\-|\/|\*)}).map do |x|          #[1.0, "+", 4.0]
+    @player_input = gets.chomp.to_s.gsub(/\s+/, "")                           
+    @player_input = player_input.split(%r{(\+|\-|\/|\*)}).map do |x|          
       unless x =~ /(\+|\-|\/|\*)/ then x.to_f else x end
     end
     player_input 
@@ -79,5 +82,4 @@ class Deck
   def remove_from_deck
     deck.delete(deck.first)
   end
-
 end
