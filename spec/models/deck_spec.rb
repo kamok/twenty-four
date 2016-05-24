@@ -131,17 +131,26 @@ describe Deck do
   end
 
   describe "#solvable?" do
-    it "calls is_input_valid? with get_player_input" do
-      # expect(deck).to receive(:is_input_valid?).with( deck.get_player_input )
-      # # allow(deck).to receive(:gets) {"5+5"}
-      # deck.solvable?
-
+    before(:each) do
+      fill_deck_with_cards
+      deck.draw_card
+      first_num, last_num = deck.current_card.first, deck.current_card.last
+      allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
+      deck.get_player_input
+    end
+    it "calls is_input_valid? with player_input" do
+      expect(deck).to receive(:input_valid?).with( deck.player_input )
+      deck.solvable?
     end
 
     it "calls updates card with calculate_input if input is valid" do
+      expect(deck).to receive(:update_card).with( deck.calculate_input )
+      deck.solvable?
     end
 
     it "prints the current_card" do
+      expect(deck).to receive(:input_valid?).with( deck.player_input )
+      expect(deck.solvable?).to be(deck.current_card)
     end
   end
 
@@ -155,7 +164,7 @@ describe Deck do
     end
   end
 
-  describe "#is_input_valid?" do
+  describe "#input_valid?" do
     before(:each) do
       fill_deck_with_cards
       deck.draw_card
@@ -165,14 +174,14 @@ describe Deck do
       allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
       deck.get_player_input
 
-      expect(deck.is_input_valid?(deck.player_input)).to be(true)
+      expect(deck.input_valid?(deck.player_input)).to be(true)
     end
 
     it "returns false if input contains ANY numbers NOT from the current_card" do
       allow(deck).to receive(:gets) {"99/99"}
       deck.get_player_input
 
-      expect(deck.is_input_valid?(deck.player_input)).to be(false)
+      expect(deck.input_valid?(deck.player_input)).to be(false)
     end
   end
 

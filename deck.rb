@@ -43,7 +43,7 @@ class Deck
   end
 
   def solvable?
-    if is_input_valid?(player_input)
+    if input_valid?(player_input)
       update_card(calculate_input)   
     end
     p current_card
@@ -57,7 +57,7 @@ class Deck
     player_input 
   end
 
-  def is_input_valid?(input)
+  def input_valid?(input)
     if current_card.include?(input.first) && current_card.include?(input.last) 
       true
     else 
