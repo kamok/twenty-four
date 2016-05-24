@@ -195,10 +195,15 @@ describe Deck do
   end
 
   describe "#update_card" do
-    it "deletes 2 old card values from current_card" do
+    before(:each) do
+      fill_deck_and_draw_card
+      input_valid_player_input
     end
 
-    it "inserts a new card value into current_card" do
+    it "decreases the number of values in current_card by 1" do 
+      expect(deck.current_card.count).to be(4)
+      deck.update_card(deck.calculate_input)
+      expect(deck.current_card.count).to be(3)
     end
   end
 
