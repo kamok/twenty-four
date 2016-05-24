@@ -105,23 +105,33 @@ describe Deck do
     end
   end
 
-  describe "#remove_from_deck" do
+  describe "#card_solved?" do
     before(:each) do
-      fill_deck_with_cards
+      deck.pick_hard_cards(1)
+      deck.draw_card
     end
-    it "removes a card from the deck" do
-      deck.remove_from_deck
-
-      expect(deck.deck.count).to eq(2)
+    #######################
+    # Is this untestable???
+    #######################
+    # it "calls solvable? if current_card has more than one value inside" do
+    #   expect(deck.current_card.length).to be(4)
+    #   expect(deck).to receive(:solvable?)
+    #   first_num, last_num = deck.current_card.first, deck.current_card.last
+    #   allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
+    #   deck.card_solved?
+    # end
+    it "returns true if the current_card is 24" do
+      deck.current_card = [24]
+      expect(deck.card_solved?).to be(true)
     end
-    it "removes the first card from the deck" do
-      first_card = (deck.deck.first)
-      deck.remove_from_deck
-
-
-      expect(deck.deck.first).to_not be(first_card)
+    it "returns false if current_card is NOT 24" do
+      deck.current_card = [23]
+      expect(deck.card_solved?).to be(false)
     end
   end
+
+  # describe "#solvable?" do
+  # end
 
   describe "#get_player_input" do
     it "takes in a player input of an operation and returns it in an array with floats" do
@@ -154,28 +164,27 @@ describe Deck do
     end
   end
 
-  describe "#card_solved?" do
+  # describe "#calculate_input" do
+  # end
+
+  # describe "#update_card" do
+  # end
+
+  describe "#remove_from_deck" do
     before(:each) do
-      deck.pick_hard_cards(1)
-      deck.draw_card
+      fill_deck_with_cards
     end
-    #######################
-    # Is this untestable???
-    #######################
-    # it "calls solvable? if current_card has more than one value inside" do
-    #   expect(deck.current_card.length).to be(4)
-    #   expect(deck).to receive(:solvable?)
-    #   first_num, last_num = deck.current_card.first, deck.current_card.last
-    #   allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
-    #   deck.card_solved?
-    # end
-    it "returns true if the current_card is 24" do
-      deck.current_card = [24]
-      expect(deck.card_solved?).to be(true)
+    it "removes a card from the deck" do
+      deck.remove_from_deck
+
+      expect(deck.deck.count).to eq(2)
     end
-    it "returns false if current_card is NOT 24" do
-      deck.current_card = [23]
-      expect(deck.card_solved?).to be(false)
+    it "removes the first card from the deck" do
+      first_card = (deck.deck.first)
+      deck.remove_from_deck
+
+
+      expect(deck.deck.first).to_not be(first_card)
     end
   end
 
