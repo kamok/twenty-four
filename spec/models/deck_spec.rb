@@ -1,7 +1,5 @@
 require 'spec_helper'
 require '../24/deck.rb'
-require 'pry'
-require 'stringio'
 
 describe Deck do 
   let(:deck) { Deck.new }
@@ -164,6 +162,7 @@ describe Deck do
   describe "#input_valid?" do
     before(:each) do
       fill_deck_and_draw_card
+      suppress_output
     end
     it "returns true if input contains numbers from the current_card" do
       first_num, last_num = deck.current_card.first, deck.current_card.last
