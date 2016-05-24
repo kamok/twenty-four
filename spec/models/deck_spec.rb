@@ -188,9 +188,7 @@ describe Deck do
     end
 
     it "decreases the number of values in current_card by 1" do 
-      expect(deck.current_card.count).to be(4)
-      deck.update_card(deck.calculate_input)
-      expect(deck.current_card.count).to be(3)
+      expect { deck.remove_from_deck }.to change(deck.deck, :count).by -1
     end
   end
 
@@ -206,7 +204,6 @@ describe Deck do
     it "removes the first card from the deck" do
       first_card = (deck.deck.first)
       deck.remove_from_deck
-
 
       expect(deck.deck.first).to_not be(first_card)
     end
