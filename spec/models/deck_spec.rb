@@ -29,13 +29,11 @@ describe Deck do
       fill_deck_with_cards
     end
     it "returns all cards from the original deck" do
-      card_1 = deck.deck[0]
-      card_2 = deck.deck[1]
-      card_3 = deck.deck[2]
+      deck_before_shuffle = deck.deck.dup
 
       deck.shuffle_deck!
 
-      expect(deck.deck).to include(card_1 && card_2 && card_3)
+      expect(deck.deck) =~ deck_before_shuffle
     end
 
     it "shuffles them in a different order" do
@@ -65,13 +63,13 @@ describe Deck do
     it "saves a copy of current_card" do
       deck.draw_card
 
-      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
-      save_card_data = deck.instance_variable_get(:@save_card) 
+      expect(deck.current_card).to eq(deck.save_card)
+      save_card_data = deck.save_card 
 
       deck.current_card = nil
 
       expect(deck.current_card).to eq(nil)
-      expect(deck.instance_variable_get(:@save_card)).to eq(save_card_data)
+      expect(deck.save_card).to eq(save_card_data)
     end
   end
 
@@ -81,7 +79,7 @@ describe Deck do
       deck.draw_card
     end
     it "resets the current_card back to @save_card" do
-      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
+      expect(deck.current_card).to eq(deck.save_card)
 
       deck.current_card = nil
 
@@ -89,7 +87,7 @@ describe Deck do
 
       deck.reset_card
 
-      expect(deck.current_card).to eq(deck.instance_variable_get(:@save_card))
+      expect(deck.current_card).to eq(deck.save_card)
     end
   end
 

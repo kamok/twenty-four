@@ -1,5 +1,5 @@
 class Deck 
-  attr_accessor :deck, :current_card, :player_input
+  attr_accessor :deck, :current_card, :player_input, :save_card
 
   #I get the cards from here: http://www.4nums.com/game/difficulties/
   #I use card numbers 1-5 and numbers 1000-1010.
@@ -35,7 +35,7 @@ class Deck
   end
  
   def reset_card
-    @current_card = @save_card.clone
+    @current_card = save_card.clone
   end
 
   def card_solved?
