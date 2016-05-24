@@ -45,9 +45,14 @@ describe Deck do
     end
   end
 
-  describe "#has_no_more_cards" do
+  describe "#has_no_more_cards?" do
     it "returns true when there are no cards" do
-      expect(deck.has_no_more_cards).to be(true)
+      expect(deck.has_no_more_cards?).to be(true)
+    end
+
+    it "returns false when there are cards" do
+      fill_deck_with_cards
+      expect(deck.has_no_more_cards?).to be(false)
     end
   end
 

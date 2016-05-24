@@ -25,7 +25,7 @@ class Deck
     deck.shuffle!
   end
 
-  def has_no_more_cards
+  def has_no_more_cards?
     deck.empty? ? true : false
   end
 

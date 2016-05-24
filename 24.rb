@@ -19,7 +19,7 @@ def draw_card_to_deck
 end
 
 def play
-  until @deck.has_no_more_cards
+  until @deck.has_no_more_cards?
     puts "Solve this: #{@deck.draw_card}."
     until @deck.card_solved?
       puts "Try Again! #{@deck.reset_card}"
