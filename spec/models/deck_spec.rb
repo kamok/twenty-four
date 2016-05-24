@@ -154,14 +154,30 @@ describe Deck do
     end
   end
 
-  # describe "#card_solved?" do
-  #   it "returns true or false if current_card only has one value left" do
-  #   end
-  #   it "returns true if the current_card is 24" do
-  #   end
-  #   it "returns false if current_card is NOT 24" do
-  #   end
-  # end
+  describe "#card_solved?" do
+    before(:each) do
+      deck.pick_hard_cards(1)
+      deck.draw_card
+    end
+    #######################
+    # Is this untestable???
+    #######################
+    # it "calls solvable? if current_card has more than one value inside" do
+    #   expect(deck.current_card.length).to be(4)
+    #   expect(deck).to receive(:solvable?)
+    #   first_num, last_num = deck.current_card.first, deck.current_card.last
+    #   allow(deck).to receive(:gets) {"#{first_num}-#{last_num}"}
+    #   deck.card_solved?
+    # end
+    it "returns true if the current_card is 24" do
+      deck.current_card = [24]
+      expect(deck.card_solved?).to be(true)
+    end
+    it "returns false if current_card is NOT 24" do
+      deck.current_card = [23]
+      expect(deck.card_solved?).to be(false)
+    end
+  end
 
   private
 

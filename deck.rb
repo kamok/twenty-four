@@ -36,16 +36,16 @@ class Deck
 
   def card_solved?
     until current_card.length == 1     
-      if is_input_valid?(get_player_input) == true
-        update_card(calculate_input)   
-        p current_card
-      else 
-        puts "A number you typed isn't even on the card..."
-        p current_card
-        false
-      end
+      solvable?
     end
     current_card == [24] ? true : false                                                                     
+  end
+
+  def solvable?
+    if is_input_valid?(get_player_input)
+      update_card(calculate_input)   
+    end
+    p current_card
   end
 
   def get_player_input
@@ -57,7 +57,12 @@ class Deck
   end
 
   def is_input_valid?(input)
-    current_card.include?(input.first) && current_card.include?(input.last) ? true : false
+    if current_card.include?(input.first) && current_card.include?(input.last) 
+      true
+    else 
+      puts "A number you typed isn't even on the card."
+      false
+    end
   end  
 
   def calculate_input
